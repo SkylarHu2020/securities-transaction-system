@@ -22,7 +22,7 @@
       <el-table-column prop="code" label="code" align="center"
         sortable :sort-orders="['ascending', 'descending']" />
       <el-table-column prop="name" label="name" align="center"/>
-      <el-table-column prop="count" label="count" align="center"/>
+      <el-table-column prop="volumn" label="volumn" align="center"/>
       <el-table-column prop="cost" label="cost" align="center"/>
       <el-table-column label="成本" align="center"/>
     </el-table>
@@ -43,7 +43,7 @@
         layout="total, prev, pager, next"
         :current-page="query.currentPage"
         :page-size="query.pageSize"
-        :total="dataTotalCount"
+        :total="dataTotalvolumn"
         @current-change="handlePageChange"
       >
       </el-pagination>
@@ -58,12 +58,12 @@ export default {
     return {
       balance: 10,
       tableData: [
-        {code: '000001', name: 'stock name1', count: 100, cost: 20},
-        {code: '000002', name: 'stock name2', count: 100, cost: 20},
-        {code: '000003', name: 'stock name3', count: 100, cost: 20},
-        {code: '000004', name: 'stock name4', count: 100, cost: 20},
+        {code: '000001', name: 'stock name1', volumn: 10, cost: 40},
+        {code: '000002', name: 'stock name2', volumn: 20, cost: 24},
+        {code: '000003', name: 'stock name3', volumn: 30, cost: 56},
+        {code: '000004', name: 'stock name4', volumn: 40, cost: 30},
       ],
-      dataTotalCount: 4,
+      dataTotalvolumn: 4,
       query: {
         currentPage: 1,
         pageSize: 2,

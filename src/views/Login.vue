@@ -1,30 +1,34 @@
 <template>
-    <!-- 第一步   -->
   <div class="login-wrap">
-    <!--    第二步，增加element ui    -->
-    <!--    第三步   -->
-    <el-form class="login-container">
+    <el-form
+      class="login-container"
+      ref='loginForm'
+      :model='loginForm'
+      :rules='rules'
+    >
       <h3 class="title">User Login</h3>
-      <el-form-item>
-        <el-input type="text" placeholder="account"></el-input>
+      <el-form-item prop="account">
+        <el-input
+          type="text"
+          placeholder="account"
+          v-model='loginForm.account'
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          type="password"
+          placeholder="password"
+          v-model='loginForm.password'
+          @keyup.enter.native="login('loginForm')"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input type="password" placeholder="password"></el-input>
-      </el-form-item>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item>
-            <el-row>
-              <el-input type="text" auto-complete="off" placeholder="Verification Code"/>
-            </el-row>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <img />
-        </el-col>
-      </el-row>
-      <el-form-item>
-        <el-button type="primary" style="width:100%;">
+        <el-button
+          type="primary"
+          style="width:100%;"
+          :loading='loading'
+          @click="login('loginForm')"
+        >
           Login
         </el-button>
       </el-form-item>
@@ -33,13 +37,49 @@
 </template>
 
 <script>
-    export default {
-        name: "Login"
+import { signIn } from '@/api/user.js'
+  export default {
+    name: "Login",
+    data () {
+      return {
+        loginForm: {
+          account: '',
+          password: ''
+        },
+        loading: false,
+        rules: {
+          account: [{required: true, message: "please enter your account", trigger: 'blur'}],
+          password: [{required: true, message: "Please enter your password", trigger: 'blur'}]
+        }
+      }
+    },
+    methods: {
+      login (formName) {
+        this.loading = true
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            try {
+              signIn({
+                account: this.account,
+                password: this.password
+              })
+            } catch (err) {
+
+            }
+            this.loading = false
+            this.$router.push({
+              path: '/dashboard'
+            })
+          } else {
+            this.loading = false
+          }
+        })
+      }
     }
+  }
 </script>
 
 <style scoped>
-  /*第一步*/
   .login-wrap {
     box-sizing: border-box;
     width: 100%;

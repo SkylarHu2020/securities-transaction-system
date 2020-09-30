@@ -44,5 +44,5 @@ export default {
 </script>
 
 <style lang="postcss">
-// just check git
+
 </style>

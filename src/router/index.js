@@ -11,6 +11,7 @@ import TradeQuery from '@/views/TradeQuery.vue'
 import HisOrderQuery from '@/views/HisOrderQuery.vue'
 import HisTradeQuery from '@/views/HisTradeQuery.vue'
 import Buy from '@/views/Buy.vue'
+import Sell from '@/views/Sell.vue'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,12 @@ const routes = [
         path: '/buy',
         name: 'Buy',
         component: Buy,
+        // meta: {requireAuth: true}
+      },
+      {
+        path: '/sell',
+        name: 'Sell',
+        component: Sell,
         // meta: {requireAuth: true}
       },
     ]

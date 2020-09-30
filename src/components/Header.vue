@@ -18,7 +18,8 @@
             <i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>Log out</el-dropdown-item>
+            <el-dropdown-item
+            >Log out</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -39,6 +40,9 @@ export default {
     collapseChange () {
       this.collapse = !this.collapse
       this.$bus.emit("collapse", this.collapse)
+    },
+    signOut () {
+      this.$store.dispatch('signOut')
     }
   }
 }

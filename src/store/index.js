@@ -9,7 +9,10 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
-  },
-  modules: {
+    signOut () {
+      sessionStorage.removeItem('account')
+      sessionStorage.removeItem('token')
+      this.$router.push({path: '/'})
+    }
   }
 })

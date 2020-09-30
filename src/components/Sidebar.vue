@@ -46,38 +46,38 @@ export default {
         {
           icon: 'el-icon-pie-chart',
           index: 'dashboard',
-          title: '资金股份'
+          title: 'Positions'
         },
         {
           icon: 'el-icon-s-order',
           index: 'buy',
-          title: '买入'
+          title: 'Buy'
         },
         {
           icon: 'el-icon-sell',
           index: 'sell',
-          title: '卖出'
+          title: 'Sell'
         },
         {
           icon: 'el-icon-search',
           index: '3',
-          title: '查询',
+          title: 'Check Orders',
           subs: [
             {
               index: 'orderquery',
-              title: '当日委托'
+              title: 'Today\'s Order'
             },
             {
               index: 'tradequery',
-              title: '当日成交'
+              title: 'Today\'s Transaction'
             },
             {
               index: 'hisorderquery',
-              title: '历史委托'
+              title: 'History\'s Order'
             },
             {
               index: 'histradequery',
-              title: '历史成交'
+              title: 'History\'s Transaction'
             },
           ]
         },
@@ -85,22 +85,22 @@ export default {
         {
           icon: 'el-icon-bank-card',
           index: '4',
-          title: '银证业务',
+          title: 'Banking',
           subs: [
             {
               index: 'transfer',
-              title: '银证转账'
+              title: 'Make a Transfer'
             },
             {
               index: 'transferquery',
-              title: '转账查询'
+              title: 'History Transfer'
             },
           ]
         },
         {
           icon: 'el-icon-setting',
           index: 'pwdsetting',
-          title: '修改密码'
+          title: 'Change Password'
         },
     ]
     }
@@ -140,35 +140,27 @@ export default {
     bottom: 0;
     overflow-y: scroll;
   }
-
     .el-menu-item {
-      min-width: 150px;
+      min-width: 170px;
     }
-
     li {
       text-align: left;
     }
       .el-tooltip {
           width: auto ! important;
       }
-
-    /*下拉导航菜单多出1px*/
     .el-menu {
         border-right-width: 0;
     }
-
     .el-menu--collapse{
         width: auto ! important;
     }
-
   .sidebar::-webkit-scrollbar {
       width: 0;
   }
-
   .sidebar-el-menu:not(.el-menu--collapse) {
-    width: 150px;
+    width: 170px;
   }
-
   .sidebar > ul {
     height: 100%;
   }
