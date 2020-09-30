@@ -12,13 +12,13 @@
     <!-- menu -->
     <div class="header-right">
       <div class="header-user-con">
-        <el-dropdown class="user-name" trigger="click">
+        <el-dropdown class="user-name" trigger="click" @command="signOut">
           <span class="el-dropdown-link">
             {{ username }}
             <i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
+            <el-dropdown-item command="signOut"
             >Log out</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -32,8 +32,13 @@ export default {
   name: 'Header',
   data () {
     return {
-      username: 'guest',
       collapse: false,
+    }
+  },
+  computed: {
+    username () {
+      const account = sessionStorage.getItem('account')
+      return account ? account : 'guest'
     }
   },
   methods: {

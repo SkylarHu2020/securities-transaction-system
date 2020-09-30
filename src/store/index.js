@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '@/router/index.js'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,12 @@ export default new Vuex.Store({
     signOut () {
       sessionStorage.removeItem('account')
       sessionStorage.removeItem('token')
-      this.$router.push({path: '/'})
+      router.replace({
+        path: '/',
+        query: {
+          msg: 'log out successfully!'
+        }
+      })
     }
   }
 })

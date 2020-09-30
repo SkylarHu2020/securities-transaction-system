@@ -19,7 +19,7 @@
             <el-input :type="'password'" v-model="form.newPasswordCfm"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button style="float: right" size="small" type="primary">Confirm</el-button>
+            <el-button style="float: right" size="small" type="primary" @click="confirm">Confirm</el-button>
           </el-form-item>
         </el-form>
       </el-row>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import user from '@/api/user.js'
 export default {
   name: 'PwdSetting',
   data () {
@@ -37,6 +38,27 @@ export default {
         newPassword: '',
         newPasswordCfm: '',
       }
+    }
+  },
+  methods: {
+    confirm () {
+      if (this.form.newPassword != this.form.newPasswordCfm) {
+        this.$message.warning("The confirm password is not same as your new password, please confirm.")
+        return
+      }
+
+      if (this.form.newPassword.length < 4) {
+        this.$message.warning("The password is less than 4, please enter again")
+        return
+      }
+
+      user.passwordUpdate({
+        account: sessionStorage.account,
+        oldPassword: this.form.oldPassword,
+        newPassword: this.form.newPassword
+      })
+
+      this.$router.replace({path: '/'})
     }
   }
 }

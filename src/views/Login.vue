@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { signIn } from '@/api/user.js'
+import user from '@/api/user.js'
   export default {
     name: "Login",
     data () {
@@ -53,19 +53,17 @@ import { signIn } from '@/api/user.js'
         }
       }
     },
+    created () {
+      if (Boolean(this.$route.query.msg)) {
+        this.$message.info(this.$route.query.msg + "")
+      }
+    },
     methods: {
       login (formName) {
         this.loading = true
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            try {
-              signIn({
-                account: this.account,
-                password: this.password
-              })
-            } catch (err) {
-
-            }
+            user.signIn(this.loginForm)
             this.loading = false
             this.$router.push({
               path: '/dashboard'
