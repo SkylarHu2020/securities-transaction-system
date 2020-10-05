@@ -24,7 +24,7 @@
       <el-table-column prop="name" label="name" align="center"/>
       <el-table-column prop="volumn" label="volumn" align="center"/>
       <el-table-column prop="cost" label="cost" align="center"/>
-      <el-table-column label="成本" align="center"/>
+      <el-table-column prop="price" label="price" align="center" />
     </el-table>
     <!-- pagination，refresh button -->
     <div class="pagination">
@@ -34,7 +34,7 @@
         size="mini"
         style="margin-top: 2px; float: right"
         icon="el-icon-refresh"
-        @click=""
+        @click="updateTableData"
       >
         Refresh
       </el-button>
@@ -52,23 +52,40 @@
 </template>
 
 <script>
+import order from '@/api/order.js'
 export default {
   name: "PosiList",
+  computed: {
+    posiDate() {
+      return this.$store.state.posiData
+    },
+    balanceData() {
+      return this.$store.state.balance
+    }
+  },
+  watch: {
+    posiData: function (val) {
+      this.tableData = val
+      this.dataTotalvolumn = val.length
+    },
+    balanceData: function (val) {
+      this.balance = val
+    }
+  },
   data () {
     return {
-      balance: 10,
-      tableData: [
-        {code: '000001', name: 'stock name1', volumn: 10, cost: 40},
-        {code: '000002', name: 'stock name2', volumn: 20, cost: 24},
-        {code: '000003', name: 'stock name3', volumn: 30, cost: 56},
-        {code: '000004', name: 'stock name4', volumn: 40, cost: 30},
-      ],
-      dataTotalvolumn: 4,
       query: {
         currentPage: 1,
         pageSize: 2,
       }
     }
+  },
+  created () {
+    order.queryBalance()
+    order.queryPosi()
+    this.tableData = this.posiDate
+    this.dataTotalvolumn = this.tableData.length
+    this.balance = this.balanceData
   },
   methods: {
     cellStyle ({row, column, rowIndex, columnIndex}) {
@@ -87,6 +104,13 @@ export default {
           (a,b) => a[column.prop] - b[column.prop]
         )
       }
+    },
+    updateTableData () {
+      order.queryBalance()
+      order.queryPosi()
+      this.tableData = this.posiDate
+      this.dataTotalvolumn = this.tableData.length
+      this.balance = this.balanceData
     }
   }
 }

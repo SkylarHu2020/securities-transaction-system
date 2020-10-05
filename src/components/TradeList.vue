@@ -34,7 +34,7 @@
         size="mini"
         style="margin-top: 2px; float: right"
         icon="el-icon-refresh"
-        @click=""
+        @click="updateTableData"
       >
         Refresh
       </el-button>
@@ -53,22 +53,33 @@
 </template>
 
 <script>
+import order from '@/api/order.js'
+
 export default {
-  name: 'OrderList',
+  name: 'TradeList',
+  computed: {
+    tradeData() {
+      return this.$store.state.tradeData
+    }
+  },
+  watch: {
+    tradeData: function (val) {
+      this.tableData = val
+      this.dataTotalCount = val.length
+    }
+  },
   data () {
     return {
-      balance: 10,
-      tableData: [
-        {time: '09:40:00', code: '000001', name: 'stock name1', price: 100, volumn: 10, amounts: 130, direction: 'buy'},
-        {time: '10:30:00', code: '000002', name: 'stock name2', price: 35, volumn: 5, amounts: 150, direction: 'sell'},
-        {time: '22:10:00', code: '000003', name: 'stock name3', price: 70, volumn: 100, amounts: 200, direction: 'buy'},
-      ],
-      dataTotalCount: 3,
       query: {
         currentPage: 1,
         pageSize: 2,
       }
     }
+  },
+  created () {
+    order.queryTrade()
+    this.tableData = this.tradeData
+    this.dataTotalCount = this.tableData.length
   },
   methods: {
     cellStyle ({row, column, rowIndex, columnIndex}) {
@@ -108,6 +119,11 @@ export default {
     handlePageChange (val) {
       this.$set(this.query,'currentPage', val)
     },
+    updateTableData () {
+      order.queryTrade()
+      this.tableData = this.tradeData
+      this.dataTotalCount = this.tableData.length
+    }
   }
 }
 </script>

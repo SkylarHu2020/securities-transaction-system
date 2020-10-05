@@ -6,24 +6,32 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    balance: 0,
     posiData: [],
     orderData: [],
     tradeData: [],
-    balance: 0
+    hisOrderData: [],
+    hisTradeData: []
   },
   mutations: {
     updatePosi(state, posiInfo) {
-      state.posiData = posiInfo;
+      state.posiData = posiInfo
     },
-    updateOrder(state, posiOrder) {
-      state.posiOrder = posiOrder;
+    updateOrder(state, orderInfo) {
+      state.orderData = orderInfo
     },
-    updateTrade(state, posiTrade) {
-      state.posiTrade = posiTrade;
+    updateTrade(state, tradeInfo) {
+      state.tradeData = tradeInfo
     },
     updateBalance(state, balance) {
-      state.balance = balance;
+      state.balance = balance
     },
+    updateHisOrder(state, hisOrderInfo) {
+      state.hisOrderData = hisOrderInfo
+    },
+    updateHisTrade(state, hisTradeInfo) {
+      state.hisTradeData = hisTradeInfo
+    }
   },
   actions: {
     signOut () {
